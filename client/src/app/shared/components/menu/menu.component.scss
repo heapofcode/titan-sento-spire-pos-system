@@ -1,0 +1,231 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -170px;
+  width: 170px;
+  height: 100%;
+  background: #042331;
+  transition: all .5s ease;
+}
+
+.sidebar header {
+  // background: #063146;
+  user-select: none;
+  font-size: 21px;
+  color: white;
+  text-align: center;
+  line-height: 35px;
+  background: #063146;
+  user-select: none;
+}
+
+// a{
+//   margin-right: 50px;
+// }
+
+.sidebar-brand a {
+  color: #ddd;
+}
+
+// .sidebar-brand a:hover {
+//   color: #fff;
+//   text-decoration: none;
+// }
+
+.sidebar ul a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 45px;
+  font-size: 20px;
+  color: white;
+  padding-left: 20px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255,255,255,.1);
+  border-bottom: 1px solid black;
+  transition: .4s;
+}
+
+ul li:hover a {
+  padding-left: 30px;
+}
+
+.sidebar ul a i {
+  margin-right: 16px;
+}
+
+#check{
+  display: none;
+}
+
+#check:checked ~ .sidebar{
+  left: 0;
+}
+
+// #check:checked ~ .brif-section {
+//   margin-left: 230px;
+// }
+
+#check:checked ~ label #btn{
+  left: 170px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#check:checked ~ label #cancel{
+  left: 5px;
+}
+
+#page-content-wrapper {
+  /*width: 100%;*/
+  height: 100%;
+  padding-top: 23px;
+  margin: 5px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -220px;
+}
+
+.hamburger {
+  position: fixed;
+  left: 5px;
+  top: 5px;
+  z-index: 999;
+  display: block;
+  width: 26px;
+  height: 26px;
+  // margin-left: 5px;
+  background: transparent;
+  border: none;
+}
+
+.hamburger:hover,
+.hamburger:focus,
+.hamburger:active {
+  outline: none;
+}
+
+.hamburger.close:before {
+  content: '';
+  display: block;
+  width: 100px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 32px;
+  text-align: center;
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.15s ease-in-out;
+}
+
+// .hamburger.close:hover:before {
+//   opacity: 1;
+//   display: block;
+//   transform: translate3d(-100px, 0, 0);
+//   transition: all 0.15s ease-in-out;
+// }
+
+.hamburger.close .hamb-top,
+.hamburger.close .hamb-middle,
+.hamburger.close .hamb-bottom,
+.hamburger.open .hamb-top,
+.hamburger.open .hamb-middle,
+.hamburger.open .hamb-bottom {
+  position: absolute;
+  left: 0;
+  height: 4px;
+  width: 100%;
+}
+
+.hamburger.close .hamb-top,
+.hamburger.close .hamb-middle,
+.hamburger.close .hamb-bottom {
+  background-color: #042331;
+}
+
+.hamburger.close .hamb-top {
+  top: 5px;
+  transition: all 0.15s ease-in-out;
+}
+
+.hamburger.close .hamb-middle {
+  top: 50%;
+  margin-top: -2px;
+}
+
+.hamburger.close .hamb-bottom {
+  bottom: 5px;
+  transition: all 0.15s ease-in-out;
+}
+
+// .hamburger.close:hover .hamb-top {
+//   top: 0;
+//   transition: all 0.15s ease-in-out;
+// }
+
+// .hamburger.close:hover .hamb-bottom {
+//   bottom: 0;
+//   transition: all 0.15s ease-in-out;
+// }
+
+.hamburger.open .hamb-top,
+.hamburger.open .hamb-middle,
+.hamburger.open .hamb-bottom {
+  background-color: #fff;
+}
+
+.hamburger.open .hamb-top,
+.hamburger.open .hamb-bottom {
+  top: 50%;
+  margin-top: -2px;
+}
+
+.hamburger.open .hamb-top {
+  transform: rotate(45deg);
+  transition: -webkit-transform 0.5s cubic-bezier(0.73, 1, 0.28, 0.08);
+}
+
+.hamburger.open .hamb-middle {
+  display: none;
+}
+
+.hamburger.open .hamb-bottom {
+  transform: rotate(-45deg);
+  transition: -webkit-transform 0.5s cubic-bezier(0.73, 1, 0.28, 0.08);
+}
+
+.hamburger.open:before {
+  content: '';
+  display: block;
+  width: 100px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 32px;
+  text-align: center;
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.15s ease-in-out;
+}
+
+// .hamburger.open:hover:before {
+//   opacity: 1;
+//   display: block;
+//   transform: translate3d(-100px, 0, 0);
+//   transition: all 0.15s ease-in-out;
+// }
+
+.menu-logo{
+  height: 72px;
+  display: flex;
+  position: absolute;
+  //top: 15px;
+  left: 70px;
+}
+
+
+.fa-sign-out-alt:before, .fa-calendar-check:before,
+.fa-history:before, .fa-home:before, .fa-user:before {
+  margin-right: 7px;
+}

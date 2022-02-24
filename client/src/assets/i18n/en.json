@@ -1,0 +1,16 @@
+{
+  "PAGES": {
+      "ENGINEER": {
+        "TITLE": "ENGINEER",
+        "GO_TO_ENGINEER": "Go to ENGINEER"
+      },
+      "MANAGER": {
+        "TITLE": "MANAGER",
+        "GO_TO_MANAGER": "Go to MANAGER"
+      },
+      "ADMINISTRATOR": {
+        "TITLE": "ADMINISTRATOR",
+        "GO_TO_ADMINISTRATOR": "Go to ADMINISTRATOR"
+      }
+  }
+}

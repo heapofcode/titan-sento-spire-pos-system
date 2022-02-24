@@ -1,0 +1,16 @@
+Для локализации всего что связано с datatimepicker нужно удалить @syncfusion/ej2_angular_calendars/node_modules папку @syncfusion
+Идея сделать универсальные кантролы из универсальных - провальна!!!
+
+****************************
+Для сборки exe нужно убирать worker он все ломает!!!!
+angular.json->build
+"src/assets",
+"src/manifest.webmanifest",
+"src/web.config"
+
+angular.json->production
+"serviceWorker": true,
+"ngswConfigPath": "ngsw-config.json"
+
+app.module.ts
+ServiceWorkerModule.register('ngsw-worker.js', { enabled: AppConfig.production })

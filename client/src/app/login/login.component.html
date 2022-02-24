@@ -1,0 +1,24 @@
+<div class='login-form'>
+  <div class='wrap'>
+    <div class='login-header'>Авторизация</div>
+    <div class='row'>
+      <ejs-textbox
+      placeholder='Пользователь'
+      floatLabelType='Always'
+      [(ngModel)]='username'
+      >
+      </ejs-textbox>
+    </div>
+    <div class='row'>
+      <ejs-textbox
+      type='password'
+      placeholder='Пароль'
+      floatLabelType='Always'
+      [(ngModel)]='password'
+      [autocomplete]='true'
+      ></ejs-textbox>
+    </div>
+
+    <button ejs-button (click)="login()" cssClass="e-flat" content="Вход"></button>
+  </div>
+</div>

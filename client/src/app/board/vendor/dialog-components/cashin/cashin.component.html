@@ -1,0 +1,12 @@
+<div class='row-content'>
+  <ejs-numerictextbox
+  [min]='min'
+  [showClearButton]='true'
+  [(value)]='payment.cashPayment'
+  placeholder='Сумма'
+  floatLabelType='Always'
+  cssClass='e-outline'
+  (blur)='blur($event)'
+  ></ejs-numerictextbox>
+</div>
+

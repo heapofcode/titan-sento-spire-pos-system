@@ -1,0 +1,136 @@
+<div class="e-card">
+  <ejs-grid
+  #grid
+  [dataSource]='datasource'
+  (dataBound)='dataBound()'
+  [editSettings]='editSettings'
+  [toolbar]='toolbar'
+  (actionComplete)='actionComplete($event)'
+  (dataSourceChanged)='dataSourceChanged($event)'
+  (dataStateChange)='dataStateChange($event)'
+  height = '100%'>
+    <ng-template #gridToolbar let-data>
+      <div class='toolbar'>
+        <ejs-textbox
+        #scaner
+        placeholder='Код/Штрихкод'
+        floatLabelType='Always'
+        cssClass='e-outline'
+        [width]='200'
+        [readonly]='true'
+        ></ejs-textbox>
+
+        <div class='e-btn-group'>
+          <ejs-menu [items]='toolbarMenu' (select)='menuSelect($event)'></ejs-menu>
+        </div>
+
+        <div class='work-info'>
+
+          <div *ngIf='isreturn' class='isReturn'>
+            <h1>Возврат товара</h1>
+          </div>
+          <!-- <ejs-textbox *ngIf='isReturn'
+          placeholder='Возврат товара'
+          cssClass='e-outline'
+          [width]='200'
+          [readonly]='true'
+          ></ejs-textbox> -->
+          <ejs-textbox
+          placeholder='Рабочая смена'
+          floatLabelType='Always'
+          cssClass='e-outline'
+          [width]='200'
+          [readonly]='true'
+          [(value)]='currentworkshift'
+          ></ejs-textbox>
+          <ejs-textbox
+          placeholder='Текущий пользователь'
+          floatLabelType='Always'
+          cssClass='e-outline'
+          [width]='200'
+          [readonly]='true'
+          [(value)]='currentusername'
+          ></ejs-textbox>
+        </div>
+
+      </div>
+    </ng-template>
+    <e-columns>
+      <e-column field='id' headerText='Id' [isPrimaryKey]='true' [autoFit]='true' [visible]='false'></e-column>
+      <e-column field='good.vendoreCode' headerText='Артикул' [autoFit]='true' ></e-column>
+      <e-column field='good.barcode' headerText='БарКод' [autoFit]='true'></e-column>
+      <e-column field='good.goodsName' headerText='Наименование'></e-column>
+      <e-column field='quantity' headerText='Количество' [autoFit]='true' format='N3'></e-column>
+      <e-column field='good.price' headerText='Цена' [autoFit]='true' format='N2'></e-column>
+      <e-column field='discount' headerText='Скидка' [autoFit]='true' format='N2'></e-column>
+      <e-column field='discountPercent' headerText='%Скидки' [autoFit]='true' format='N2'></e-column>
+      <e-column field='amount' headerText='Сумма' [autoFit]='true' format='N2'></e-column>
+    </e-columns>
+    <e-aggregates>
+      <e-aggregate>
+              <e-columns>
+                  <e-column field="quantity" type="sum" format="N3">
+                    <ng-template #footerTemplate let-data>{{data.sum}}</ng-template>
+                  </e-column>
+                  <e-column field="discount" type="sum" format="N2">
+                    <ng-template #footerTemplate let-data>{{data.sum}}</ng-template>
+                  </e-column>
+                  <e-column field="amount" type="sum" format="N2">
+                    <ng-template #footerTemplate let-data>{{data.sum}}</ng-template>
+                  </e-column>
+              </e-columns>
+      </e-aggregate>
+    </e-aggregates>
+    <ng-template #editSettingsTemplate let-data>
+      <div ngForm>
+        <div class='row'>
+          <ejs-textbox [(ngModel)]="data.good.goodsName" name="goodsName" id="goodsName" placeholder="Наименование" floatLabelType='Always' cssClass='e-outline' [readonly]='true' [multiline]='true'></ejs-textbox>
+        </div>
+        <div class='row'>
+          <ejs-numerictextbox *ngIf='!isReturn' #qty [(ngModel)]="data.quantity" name="quantity" id="quantity" placeholder="Количество" floatLabelType='Always' cssClass='e-outline' [min]='1' [showClearButton]='true' (blur)="quantityBlur($event)"></ejs-numerictextbox>
+          <ejs-numerictextbox *ngIf='isReturn' #qty [(ngModel)]="data.quantity" name="quantity" id="quantity" placeholder="Количество" floatLabelType='Always' cssClass='e-outline' [min]='1' [max]='data.quantity' [showClearButton]='true' (blur)="quantityBlur($event)"></ejs-numerictextbox>
+        </div>
+      </div>
+    </ng-template>
+  </ejs-grid>
+</div>
+
+<ejs-dialog
+#dialog
+[allowDragging]='true'
+[isModal]='true'
+[showCloseIcon]='true'
+[visible]='false'
+[closeOnEscape]='true'
+[width]='dialogwidth'
+(beforeClose)='beforecloseDialog()'>
+
+<ng-template #header>
+<div *ngIf='activeModule==="payment"'>Расчет</div>
+<div *ngIf='activeModule==="cashin"'>Внесение средств</div>
+<div *ngIf='activeModule==="cashout"'>Изъятие средств</div>
+<div *ngIf='activeModule==="cancel"'>Отмена чека</div>
+<div *ngIf='activeModule==="return"'>Возврат чека</div>
+</ng-template>
+
+<ng-template #content>
+<app-payment *ngIf='activeModule==="payment"' [(payment)]='payment'></app-payment>
+<app-cashin *ngIf='activeModule==="cashin"' [(payment)]='payment'></app-cashin>
+<app-cashout *ngIf='activeModule==="cashout"' [(payment)]='payment'></app-cashout>
+<app-cancel *ngIf='activeModule==="cancel"'></app-cancel>
+<app-return (onCloseDialog)='onCloseDialog($event)' *ngIf='activeModule==="return"'></app-return>
+</ng-template>
+
+<ng-template #footerTemplate>
+<button type="button" class="e-control e-btn e-lib e-primary e-flat" (click)='acceptDialog($event)'>Сохранить</button>
+<button type="button" class="e-control e-btn e-lib e-flat" (click)='hideDialog($event)'>Отмена</button>
+<!-- <div *ngIf='activeModule==="cancel"; then thenBlock else elseBlock'></div>
+  <ng-template #thenBlock>
+    <button type="button" class="e-control e-btn e-lib e-flat" (click)='hideDialog($event)'>Закрыть</button>
+  </ng-template>
+<ng-template #elseBlock>
+  <button type="button" class="e-control e-btn e-lib e-primary e-flat" (click)='acceptDialog($event)'>Сохранить</button>
+  <button type="button" class="e-control e-btn e-lib e-flat" (click)='hideDialog($event)'>Отмена</button>
+</ng-template> -->
+</ng-template>
+</ejs-dialog>

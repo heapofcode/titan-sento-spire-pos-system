@@ -1,0 +1,64 @@
+.e-grid .e-summaryrow .e-summarycell,
+.e-grid .e-summaryrow .e-templatecell {
+    color: green;
+    font-size: 14px;
+    font-weight:700;
+    text-align: left;
+}
+
+.e-grid .e-footerpadding {
+  padding-right: 1px;
+}
+
+.toolbar{
+ display: flex;
+ padding: 3px 0px 0px 0px;
+ align-items: center;
+ justify-content: center;
+}
+
+.e-menu{
+  height: 39px
+}
+
+.e-menu-item{
+  font-weight: 300;
+  line-height: 39px;
+  font-size: 14px;
+  font-family: 'Roboto';
+}
+
+.e-textbox{
+  margin-right: 3px;
+}
+
+.e-btn-group{
+ margin-bottom: 5px;
+}
+
+// .e-btn{
+//   height: 38px;
+//   width: 120px;
+// }
+
+.row{
+  margin-top:5px;
+}
+
+.e-card
+{
+  height: 50vh;
+}
+
+.work-info
+{
+  margin-left: 20px;
+  display: flex;
+}
+
+.isReturn
+{
+  margin-right: 20px;
+  color:red;
+  transition: all 0.15s;
+}

@@ -1,0 +1,29 @@
+
+<input type="checkbox" id="check" [checked]="checked">
+
+<button type="button" (click)="changeChecked()"
+class="hamburger animated fadeInLeft close"
+[ngClass]='{
+  close:hamburgerChange==="close",
+  open:hamburgerChange==="open"
+}'
+data-toggle="offcanvas">
+    <span class="hamb-top"></span>
+    <span class="hamb-middle"></span>
+    <span class="hamb-bottom"></span>
+</button>
+
+<div class="sidebar">
+<header>
+  <div class="sidebar-brand ">
+    <a>eSpos</a>
+  </div>
+</header>
+<ul>
+  <li *ngFor='let item of menu'>
+    <a routerLink="/{{item['route']}}" class="{{item['icon']}}">{{item['title']}}</a>
+  </li>
+  <li><a routerLink='#' (click)='logout($event)' class='fa fa-sign-out-alt'>Выход</a></li>
+</ul>
+</div>
+

@@ -1,0 +1,70 @@
+<div class='row-content'>
+  <ejs-numerictextbox
+  [showSpinButton]='false'
+  [readonly]='true'
+  [enabled]='false'
+  placeholder='Итого'
+  floatLabelType='Always'
+  cssClass='e-outline'
+  [(value)]='payment.amount'
+  ></ejs-numerictextbox>
+
+  <ejs-numerictextbox
+  [showSpinButton]='false'
+  [enabled]='false'
+  [readonly]='true'
+  [(value)]='payment.getAmount'
+  placeholder='Принять'
+  floatLabelType='Always'
+  cssClass='e-outline'>
+  </ejs-numerictextbox>
+
+  <ejs-numerictextbox
+  [showSpinButton]='false'
+  [enabled]='false'
+  [readonly]='true'
+  [(value)]='payment.cashBack'
+  placeholder='Сдача'
+  floatLabelType='Always'
+  cssClass='e-outline'>
+  </ejs-numerictextbox>
+</div>
+
+<div class='row-content'>
+  <ejs-numerictextbox
+  [min]='0'
+  [showClearButton]='true'
+  [(value)]='payment.cashPayment'
+  style='width: 97%;'
+  placeholder='Внесено наличные'
+  floatLabelType='Always'
+  cssClass='e-outline'
+  (change)='changeCash($event)'
+  (blur)='blurCash($event)'
+  ></ejs-numerictextbox>
+  <button id='allcash'
+  (click)='allOneClick($event)'
+  ejs-button class='radius-btn'
+  iconCss='fas fa-money-bill-wave'
+  >Вся сумма</button>
+</div>
+
+<div class='row-content'>
+  <ejs-numerictextbox
+  [min]='0'
+  [max]='payment.amount'
+  [showClearButton]='true'
+  [(value)]='payment.cardPayment'
+  style='width: 97%;'
+  placeholder='Внесено карта'
+  floatLabelType='Always'
+  cssClass='e-outline'
+  (change)='changeCard($event)'
+  (blur)='blurCard($event)'
+  ></ejs-numerictextbox>
+  <button id='allcard'
+  (click)='allOneClick($event)'
+  ejs-button class='radius-btn'
+  iconCss='fas fa-credit-card'
+  >Вся сумма</button>
+</div>

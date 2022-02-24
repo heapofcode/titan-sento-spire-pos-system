@@ -1,0 +1,74 @@
+<div class="e-card">
+  <ejs-grid
+  #grid
+  [(dataSource)]='datasource'
+  [editSettings]='editSettings'
+  [toolbar]='toolbar'
+  [allowPaging]='allowPaging'
+  [pageSettings]='pageSettings'
+  (dataSourceChanged)='dataSourceChanged($event)'
+  (dataStateChange)='dataStateChange($event)'
+  (commandClick)='commandClick($event)'
+  height = '100%'>
+  <e-columns>
+    <e-column field='id' headerText='П/п' [isPrimaryKey]='true' [autoFit]='true' [visible]='false'></e-column>
+    <e-column field='userWorkShift.numberOfWorkShift' headerText='Смена' [autoFit]='true'></e-column>
+    <e-column field='user.userName' headerText='Пользователь' [autoFit]='true'></e-column>
+    <e-column field='dateTime' headerText='Дата' [autoFit]='true'></e-column>
+    <e-column field='draftNumber' headerText='Номер' [autoFit]='true'></e-column>
+    <e-column field='amount' headerText='Сумма' [autoFit]='true'></e-column>
+    <e-column [commands]='commands'></e-column>
+  </e-columns>
+  </ejs-grid>
+</div>
+
+<ejs-dialog
+#dialog
+[allowDragging]='true'
+[isModal]='true'
+[showCloseIcon]='true'
+[visible]='false'
+[closeOnEscape]='true'
+[width]='dialogwidth'>
+
+<ng-template #header>
+</ng-template>
+
+<ng-template #content>
+  <ejs-grid
+        [(dataSource)]='dialogdatasource'
+        [allowTextWrap]='true'>
+          <e-columns>
+            <e-column field='id' headerText='Id' [isPrimaryKey]='true' [autoFit]='true' [visible]='false'></e-column>
+            <e-column field='good.vendoreCode' headerText='Артикул' [autoFit]='true' ></e-column>
+            <e-column field='good.barcode' headerText='БарКод' [autoFit]='true'></e-column>
+            <e-column field='good.goodsName' headerText='Наименование'></e-column>
+            <e-column field='quantity' headerText='Количество' [autoFit]='true' format='N3'></e-column>
+            <e-column field='price' headerText='Цена' [autoFit]='true' format='N2'></e-column>
+            <e-column field='discount' headerText='Скидка' [autoFit]='true' format='N2'></e-column>
+            <e-column field='discountPercent' headerText='%Скидки' [autoFit]='true' format='N2'></e-column>
+            <e-column field='amount' headerText='Сумма' [autoFit]='true' format='N2'></e-column>
+          </e-columns>
+          <e-aggregates>
+            <e-aggregate>
+                    <e-columns>
+                        <e-column field="quantity" type="sum" format="N3">
+                          <ng-template #footerTemplate let-data>{{data.sum}}</ng-template>
+                        </e-column>
+                        <e-column field="discount" type="sum" format="N2">
+                          <ng-template #footerTemplate let-data>{{data.sum}}</ng-template>
+                        </e-column>
+                        <e-column field="amount" type="sum" format="N2">
+                          <ng-template #footerTemplate let-data>{{data.sum}}</ng-template>
+                        </e-column>
+                    </e-columns>
+            </e-aggregate>
+          </e-aggregates>
+        </ejs-grid>
+</ng-template>
+
+<ng-template #footerTemplate>
+  <button type="button" class="e-control e-btn e-lib e-flat" (click)='hideDialog($event)'>Закрыть</button>
+</ng-template>
+
+</ejs-dialog>
